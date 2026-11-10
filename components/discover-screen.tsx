@@ -98,7 +98,7 @@ export function DiscoverScreen() {
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6">
       <section className="max-w-2xl">
         <p className="text-xs tracking-[0.22em] text-primary uppercase">What you can pour</p>
-        <h1 className="mt-2 font-heading text-4xl tracking-tight sm:text-5xl">
+        <h1 className="mt-2 font-heading text-4xl tracking-tight italic sm:text-5xl">
           Drinks from the shelf you have.
         </h1>
         <p className="mt-3 text-base text-muted-foreground">
@@ -115,7 +115,7 @@ export function DiscoverScreen() {
             {bar.catalog.progress.done}/{bar.catalog.progress.total}
           </p>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
-            <div className="h-full bg-primary transition-all" style={{ width: `${progress}%` }} />
+            <div className="h-full bg-citrus transition-all" style={{ width: `${progress}%` }} />
           </div>
         </div>
       ) : null}
@@ -272,18 +272,18 @@ export function DiscoverScreen() {
                   />
                 ) : (
                   <div className="flex aspect-[4/3] items-end bg-muted p-4">
-                    <span className="font-heading text-3xl text-primary">
+                    <span className="font-heading text-3xl italic text-primary">
                       {result.recipe.name.slice(0, 1)}
                     </span>
                   </div>
                 )}
                 <CardHeader>
-                  <CardTitle className="font-heading text-2xl leading-tight">
+                  <CardTitle className="font-heading text-2xl leading-tight italic">
                     {result.recipe.name}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-wrap gap-1.5">
-                  <Badge variant={result.missing.length === 0 ? "default" : "outline"}>
+                  <Badge variant={result.missing.length === 0 ? "ready" : "missing"}>
                     {missingLabel(result.missing)}
                   </Badge>
                   <Badge variant="secondary">{alcoholLabel(result.recipe.alcoholic)}</Badge>
@@ -373,7 +373,7 @@ function EmptyResults({
   if (pantryEmpty && !query.trim()) {
     return (
       <div className="rounded-2xl border border-dashed border-border px-6 py-12">
-        <h2 className="font-heading text-3xl">Nothing is on the bar yet.</h2>
+        <h2 className="font-heading text-3xl italic">Nothing is on the bar yet.</h2>
         <p className="mt-2 max-w-lg text-muted-foreground">
           Add gin, lime, and a few mixers, or start from a shelf that already knows its
           classics. Name search still works before the bar is stocked.
@@ -386,7 +386,7 @@ function EmptyResults({
   }
   return (
     <div className="rounded-2xl border border-dashed border-border px-6 py-12">
-      <h2 className="font-heading text-3xl">Nothing matches this cut.</h2>
+      <h2 className="font-heading text-3xl italic">Nothing matches this cut.</h2>
       <p className="mt-2 max-w-lg text-muted-foreground">
         {readyOnly
           ? "Ready is on, so drinks that need another bottle are hidden. Try One away, or add the ingredient the cards keep asking for."

@@ -27,9 +27,9 @@ export function SiteHeader() {
           <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
             <Martini className="size-4" />
           </span>
-          <span className="font-heading text-xl tracking-tight">On Hand</span>
+          <span className="font-heading text-2xl tracking-tight italic">Mixr</span>
         </Link>
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center gap-3">
           {LINKS.map((link) => {
             const active = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
             return (
@@ -37,8 +37,10 @@ export function SiteHeader() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "rounded-full px-3 py-1.5 text-sm",
-                  active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+                  "border-b border-transparent px-0.5 pb-0.5 text-sm transition-colors",
+                  active
+                    ? "border-primary text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {link.label}

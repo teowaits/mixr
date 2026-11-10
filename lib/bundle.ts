@@ -73,7 +73,7 @@ export function parseBundle(raw: unknown): ImportResult {
     throw new Error("That file isn’t a recipe bundle.");
   }
   if (raw.version !== 1) {
-    throw new Error("This file uses a bundle version On Hand doesn’t read yet.");
+    throw new Error("This file uses a bundle version Mixr doesn’t read yet.");
   }
 
   const kind = raw.kind === "recipes" ? "recipes" : "all";

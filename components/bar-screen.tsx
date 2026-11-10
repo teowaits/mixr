@@ -58,7 +58,7 @@ export function BarScreen() {
       <section className="order-2 grid gap-6 lg:order-1">
         <div>
           <p className="text-xs tracking-[0.22em] text-primary uppercase">The bar</p>
-          <h1 className="mt-2 font-heading text-4xl tracking-tight">What you can reach.</h1>
+          <h1 className="mt-2 font-heading text-4xl tracking-tight italic">What you can reach.</h1>
           <p className="mt-3 max-w-xl text-muted-foreground">
             This list stays in this browser. Export it if you want the same shelf on another
             machine. Names follow TheCocktailDB when they can, and anything else you type is
@@ -102,7 +102,7 @@ export function BarScreen() {
 
         {bar.pantry.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border px-5 py-8">
-            <h2 className="font-heading text-2xl">The shelf is clear.</h2>
+            <h2 className="font-heading text-2xl italic">The shelf is clear.</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Start with a preset, or type the first bottle you actually own.
             </p>

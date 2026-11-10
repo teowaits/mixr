@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { cn } from "cn";
 import { toast } from "sonner";
 import { useBar } from "@/components/bar-context";
 import { RecipeForm } from "@/components/recipe-form";
@@ -35,7 +36,7 @@ export function DrinkScreen() {
   if (!recipe || !score) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-10">
-        <h1 className="font-heading text-4xl">That drink isn’t here.</h1>
+        <h1 className="font-heading text-4xl italic">That drink isn’t here.</h1>
         <p className="mt-2 text-muted-foreground">
           It may have been deleted, or the catalog hasn’t finished loading.
         </p>
@@ -60,7 +61,9 @@ export function DrinkScreen() {
           />
         ) : (
           <div className="flex aspect-square items-end rounded-2xl bg-muted p-6">
-            <span className="font-heading text-6xl text-primary">{recipe.name.slice(0, 1)}</span>
+            <span className="font-heading text-6xl italic text-primary">
+              {recipe.name.slice(0, 1)}
+            </span>
           </div>
         )}
       </div>
@@ -68,9 +71,13 @@ export function DrinkScreen() {
         <Link href="/" className="text-sm text-primary hover:underline">
           All drinks
         </Link>
-        <h1 className="mt-2 font-heading text-4xl tracking-tight sm:text-5xl">{recipe.name}</h1>
+        <h1 className="mt-2 font-heading text-4xl tracking-tight italic sm:text-5xl">
+          {recipe.name}
+        </h1>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Badge>{score.missing.length === 0 ? "Ready" : `Needs ${score.missing.length}`}</Badge>
+          <Badge variant={score.missing.length === 0 ? "ready" : "missing"}>
+            {score.missing.length === 0 ? "Ready" : `Needs ${score.missing.length}`}
+          </Badge>
           <Badge variant="secondary">
             {recipe.alcoholic === "Non alcoholic"
               ? "No alcohol"
@@ -136,11 +143,13 @@ export function DrinkScreen() {
             const absent = missing.has(line.name.toLowerCase());
             return (
               <li key={`${line.name}-${line.measure}`} className="flex items-center gap-3 px-3 py-2 text-sm">
-                <span className={absent ? "text-destructive" : "text-foreground"}>
+                <span className={absent ? "text-missing" : "text-foreground"}>
                   {line.measure ? `${line.measure} ` : ""}
                   {line.name}
                 </span>
-                <span className="ml-auto text-xs text-muted-foreground">{absent ? "Missing" : "On hand"}</span>
+                <span className={cn("ml-auto text-xs", absent ? "text-missing" : "text-ready")}>
+                  {absent ? "Missing" : "On hand"}
+                </span>
                 {absent ? (
                   <Button
                     size="sm"

@@ -11,13 +11,14 @@ export type CatalogSnapshot = {
   cappedLetters: string[];
 };
 
-const DB_NAME = "on-hand";
+const DB_NAME = "mixr";
+const LEGACY_DB_NAME = "on-hand";
 const STORE = "snapshots";
 const KEY = "current";
 
-function openDb(): Promise<IDBDatabase> {
+function openNamedDb(name: string): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DB_NAME, 1);
+    const request = indexedDB.open(name, 1);
     request.onupgradeneeded = () => {
       const db = request.result;
       if (!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE);
@@ -27,9 +28,11 @@ function openDb(): Promise<IDBDatabase> {
   });
 }
 
-export async function readSnapshot(): Promise<CatalogSnapshot | null> {
-  if (typeof indexedDB === "undefined") return null;
-  const db = await openDb();
+function openDb(): Promise<IDBDatabase> {
+  return openNamedDb(DB_NAME);
+}
+
+function readFromDb(db: IDBDatabase): Promise<CatalogSnapshot | null> {
   return new Promise((resolve, reject) => {
     const request = db.transaction(STORE, "readonly").objectStore(STORE).get(KEY);
     request.onsuccess = () => {
@@ -39,6 +42,28 @@ export async function readSnapshot(): Promise<CatalogSnapshot | null> {
     };
     request.onerror = () => reject(request.error);
   });
+}
+
+async function readLegacySnapshot(): Promise<CatalogSnapshot | null> {
+  try {
+    const db = await openNamedDb(LEGACY_DB_NAME);
+    return await readFromDb(db);
+  } catch {
+    return null;
+  }
+}
+
+export async function readSnapshot(): Promise<CatalogSnapshot | null> {
+  if (typeof indexedDB === "undefined") return null;
+  const db = await openDb();
+  const current = await readFromDb(db);
+  if (current) return current;
+
+  const legacy = await readLegacySnapshot();
+  if (!legacy) return null;
+
+  await writeSnapshot(legacy);
+  return legacy;
 }
 
 export async function writeSnapshot(snapshot: CatalogSnapshot): Promise<void> {

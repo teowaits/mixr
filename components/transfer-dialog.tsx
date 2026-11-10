@@ -30,7 +30,7 @@ export function TransferDialog({ trigger }: { trigger: React.ReactNode }) {
         recipes: bar.customRecipes,
         savedIds: bar.savedIds,
       }),
-      "on-hand-bar.json",
+      "mixr-bar.json",
     );
     toast("Downloaded your bar, saved drinks, and recipes.");
   }
@@ -48,7 +48,7 @@ export function TransferDialog({ trigger }: { trigger: React.ReactNode }) {
         recipes,
         savedIds: bar.savedIds,
       }),
-      "on-hand-recipes.json",
+      "mixr-recipes.json",
     );
     toast("Downloaded recipes only. Your bar stayed out of the file.");
   }
