@@ -1,6 +1,6 @@
-# On Hand
+# Mixr
 
-On Hand matches cocktail recipes to the bottles and mixers you already have. Search by what is on the bar, then narrow by alcohol, temperature, season, category, or glass. Your bar, saved drinks, and recipes you write stay in this browser. Import and export move them as JSON.
+Mixr matches cocktail recipes to the bottles and mixers you already have. Search by what is on the bar, then narrow by alcohol, temperature, season, category, or glass. Your bar, saved drinks, and recipes you write stay in this browser. Import and export move them as JSON.
 
 Recipe data and imagery come from [TheCocktailDB](https://www.thecocktaildb.com/).
 
