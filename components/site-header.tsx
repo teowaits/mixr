@@ -21,10 +21,14 @@ export function SiteHeader() {
   const premium = settings.apiKey.trim() !== TEST_API_KEY && !catalog.truncated;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-primary/15 bg-background/70 shadow-[0_1px_0_0_oklch(0.84_0.1_82_/_0.12)] backdrop-blur-md relative">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"
+      />
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-3 px-4 py-3 sm:px-6">
         <Link href="/" className="mr-2 flex items-center gap-2">
-          <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+          <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_0_24px_oklch(0.84_0.1_82_/_0.35)]">
             <Martini className="size-4" />
           </span>
           <span className="font-heading text-2xl tracking-tight italic">Mixr</span>

@@ -35,7 +35,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <BarProvider>
           <SiteHeader />
           <main className="flex-1">{children}</main>
-          <footer className="border-t border-border/80 px-4 py-6 text-center text-xs text-muted-foreground sm:px-6">
+          <footer className="relative border-t border-primary/15 px-4 py-6 text-center text-xs text-muted-foreground sm:px-6">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 -top-16 h-16 bg-[radial-gradient(ellipse_at_center,oklch(0.42_0.08_72_/_0.18),transparent_70%)]"
+            />
             Recipes are for adults 21 and older. Drink responsibly, and never before you drive.
             Recipe data and imagery:{" "}
             <a className="underline-offset-4 hover:underline" href="https://www.thecocktaildb.com/">
